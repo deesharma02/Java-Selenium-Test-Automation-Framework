@@ -9,6 +9,7 @@ import utilities.JSONUtilities;
 
 public final class HomePage extends BrowserUtility {
 
+    private static final By SIGN_ON_LOCATOR = By.xpath("//a[@title='Log in to your customer account']");
     public HomePage(Browser driver, boolean isHeadless){
         super(driver ,isHeadless);
         gotoWebsite(JSONUtilities.readJson(QA).getUrl());
@@ -21,10 +22,10 @@ public final class HomePage extends BrowserUtility {
         maximizaBrowser();
     }
 
-    private static final By SIGN_ON_LOCATOR = By.xpath("//a[@title='Log in to your customer account']");
 
     public LoginPage ClickOnSignIn(){
         clickOn(SIGN_ON_LOCATOR);
         return new LoginPage(getDriver());
     }
+
 }

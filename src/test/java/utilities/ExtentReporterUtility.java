@@ -11,7 +11,7 @@ public class ExtentReporterUtility {
     private static final ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
 
     public static void setUpSparkReport(){
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/myreport.html");
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//reports//myreport.html");
 
         extentSparkReporter.config().setDocumentTitle("Automation Report");
         extentSparkReporter.config().setReportName("Functional Testing");

@@ -10,7 +10,7 @@ import java.util.Properties;
 public class PropertiesUtil {
 
     public static String readProperty(Environments environment , String propertyName){
-        File file = new File(System.getProperty("user.dir") + "\\Config\\"+environment+".properties");
+        File file = new File(System.getProperty("user.dir") + "//Config//"+environment+".properties");
         FileReader fileReader = null;
         Properties prop = new Properties();
         try {

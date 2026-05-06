@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,7 @@ import java.util.Date;
 public class BrowserUtility {
 
     private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+//    private static WebDriverWait wait;
 
     protected BrowserUtility(WebDriver driver){
         super();
@@ -94,10 +98,34 @@ public class BrowserUtility {
         ele.sendKeys(text);
     }
 
-    public String getText(By locator){
+    public void clearTextEntry(By locator){
+        WebElement ele = driverThreadLocal.get().findElement(locator);
+        ele.clear();
+    }
+
+    public void mouseHoverAction(By locator){
+        WebElement element = driverThreadLocal.get().findElement(locator);
+        Actions actions = new Actions(driverThreadLocal.get());
+        actions.moveToElement(element).build().perform();
+    }
+
+    public void enterKeys(By locator , Keys keys){
+        WebElement ele = driverThreadLocal.get().findElement(locator);
+        ele.sendKeys(keys);
+    }
+
+    public void selectDropDownValue(By locator , String value){
+        WebElement ele = driverThreadLocal.get().findElement(locator);
+        Select select = new Select(ele);
+        select.selectByValue(value);
+    }
+
+    public static String getText(By locator){
         WebElement ele = driverThreadLocal.get().findElement(locator);
         return ele.getText();
     }
+
+
 
     public static String takeScreenShot(String name) {
 
@@ -114,7 +142,7 @@ public class BrowserUtility {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HH-mm-ss_SSS").format(new Date());
         String threadId = String.valueOf(Thread.currentThread().getId());
 
-        String path = System.getProperty("user.dir") + "/screenshots/"
+        String path = "./screenshots/"
                 + name + "_" + threadId + "_" + timestamp + ".png";
 
         try {

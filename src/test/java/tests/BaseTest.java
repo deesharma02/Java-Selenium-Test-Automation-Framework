@@ -34,7 +34,7 @@ public class BaseTest {
         return homePage;
     }
 
-    @AfterMethod(alwaysRun = true)
+//    @AfterMethod(alwaysRun = true)
     public void tearDown(){
         if(isLambdaTest){
             LambdaTestUtility.closeBrowser();
