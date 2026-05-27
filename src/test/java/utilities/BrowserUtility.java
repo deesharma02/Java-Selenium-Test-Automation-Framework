@@ -69,7 +69,7 @@ public class BrowserUtility {
                 EdgeOptions options = new EdgeOptions();
                 options.addArguments("--headless=new");
                 options.addArguments("--window-size=1920,1080");
-                driverThreadLocal.set(new EdgeDriver());
+                driverThreadLocal.set(new EdgeDriver(options));
             } else {
                 System.out.println("Invalid Browser Name");
             }

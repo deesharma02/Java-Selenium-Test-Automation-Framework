@@ -16,12 +16,19 @@ public class LambdaTestUtility {
     private static ThreadLocal<DesiredCapabilities> capabilitiesThreadLocal = new ThreadLocal<>();
 
     public static WebDriver intializaLambdaTest(String browser , String testName){
+        String lambdaTestUser = System.getenv("LT_USERNAME");
+        String lambdaTestAccessKey = System.getenv("LT_ACCESS_KEY");
+
+        if (lambdaTestUser == null || lambdaTestUser.isBlank() || lambdaTestAccessKey == null || lambdaTestAccessKey.isBlank()) {
+            throw new IllegalStateException("LT_USERNAME and LT_ACCESS_KEY environment variables are required for LambdaTest execution.");
+        }
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", browser);
         capabilities.setCapability("browserVersion", "latest");
         Map<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("user", "dabaangdeepak2");
-        ltOptions.put("accessKey", "LT_qTr5XsWZh4X0dMvcZJtWuKbEOHOknY9SoOC7h8z9w1NXGCk");
+        ltOptions.put("user", lambdaTestUser);
+        ltOptions.put("accessKey", lambdaTestAccessKey);
         ltOptions.put("build", "Selenium 4");
         ltOptions.put("name", testName);
         ltOptions.put("platformName", "Windows 10");

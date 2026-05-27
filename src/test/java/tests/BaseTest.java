@@ -25,16 +25,17 @@ public class BaseTest {
         if(isLambdaTest){
             lambdaDriver = LambdaTestUtility.intializaLambdaTest(browser , result.getMethod().getMethodName());
             homePage = new HomePage(lambdaDriver);
+        } else {
+            BrowserUtility.closeBrowser();
+            homePage = new HomePage(Browser.valueOf(browser.toUpperCase()) , isHeadless);
         }
-        BrowserUtility.closeBrowser();
-        homePage = new HomePage(Browser.valueOf(browser.toUpperCase()) , isHeadless);
     }
 
     public BrowserUtility getInstance(){
         return homePage;
     }
 
-//    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown(){
         if(isLambdaTest){
             LambdaTestUtility.closeBrowser();
